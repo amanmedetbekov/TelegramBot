@@ -1,3 +1,4 @@
+from email.mime import image
 import telebot
 from telebot import types
 from Buttons_for_Menu import *
@@ -56,15 +57,7 @@ def panel_buttons(message):
             'Next ➡️', callback_data='Next')
         markup.add(button_next, button_back)
 
-        for items in products_data['results']:
-            mess = f"Title: {items['title']}\
-                \nPrice: {items['price']}\
-                \nDescription: {items['description']}\
-                \nType: {items['category']}\
-                \nBarnd: {items['brand']}\
-                \nSize: {items['size']}"
-
-        bot.send_message(message.chat.id, mess, reply_markup=markup)
+        bot.send_message(message.chat.id, cycle_panel, reply_markup=markup)
 
     # Веб-сайт
     elif message.text == website_panel:
@@ -124,7 +117,10 @@ def callback(call):
                 \nType: {items['category']}\
                 \nBarnd: {items['brand']}\
                 \nSize: {items['size']}"
-            bot.send_message(call.message.chat.id, mess)
+            markup = telebot.types.InlineKeyboardMarkup()
+            image_butt = telebot.types.InlineKeyboardButton("Image", url=items['images'][0]['image'])
+            markup.add(image_butt)
+            bot.send_message(call.message.chat.id, mess, reply_markup=markup)
 
 
 bot.polling(non_stop=True)
