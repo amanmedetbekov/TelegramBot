@@ -77,6 +77,9 @@ def panel_buttons(message):
         bot.send_message(message.chat.id, f'{menu_panel} >>> {other_panel}',
                          reply_markup=markup)
 
+    #Информация
+    elif message.text == info_panel:
+        bot.send_message(message.chat.id, f'Меня зовут {bot.get_me().first_name} 🙂')
     # Меню
     elif message.text == menu_panel:
         menu(message)
@@ -106,6 +109,9 @@ def panel_buttons(message):
         markup.add(menu_butt)
         bot.send_message(message.chat.id, type_panel, reply_markup=markup)
 
+    else:
+        bot.send_message(message.chat.id, 'Я ничего не нашел 😣')
+        menu(message)
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback(call):
