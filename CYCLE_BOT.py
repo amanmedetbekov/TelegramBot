@@ -80,7 +80,8 @@ def panel_buttons(message):
     # Информация
     elif message.text == info_panel:
         bot.send_message(
-            message.chat.id, f'Меня зовут {bot.get_me().first_name} 🙂')
+            message.chat.id, f'Меня зовут {bot.get_me().first_name} 🙂\
+                \nА тебя зовут {message.from_user.first_name}')
     # Меню
     elif message.text == menu_panel:
         menu(message)
