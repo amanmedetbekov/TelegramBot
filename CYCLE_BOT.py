@@ -3,8 +3,8 @@ import telebot
 from telebot import types
 from Buttons_for_Menu import *
 from my_configs import TOKEN_CYCLE_BOT
-
 from products_cycles import products_data
+
 
 bot = telebot.TeleBot(TOKEN_CYCLE_BOT)
 
@@ -63,7 +63,7 @@ def panel_buttons(message):
     elif message.text == website_panel:
         markup_inline = types.InlineKeyboardMarkup(row_width=5)
         butt_inline = types.InlineKeyboardButton(
-            'Перейти на сайт', url='http://18.197.23.213/products')
+            'Перейти на сайт', url='https://fullstack-cycle.web.app/')
 
         markup_inline.add(butt_inline)
         bot.send_message(message.chat.id, website_panel,
@@ -77,9 +77,10 @@ def panel_buttons(message):
         bot.send_message(message.chat.id, f'{menu_panel} >>> {other_panel}',
                          reply_markup=markup)
 
-    #Информация
+    # Информация
     elif message.text == info_panel:
-        bot.send_message(message.chat.id, f'Меня зовут {bot.get_me().first_name} 🙂')
+        bot.send_message(
+            message.chat.id, f'Меня зовут {bot.get_me().first_name} 🙂')
     # Меню
     elif message.text == menu_panel:
         menu(message)
@@ -113,6 +114,7 @@ def panel_buttons(message):
         bot.send_message(message.chat.id, 'Я ничего не нашел 😣')
         menu(message)
 
+
 @bot.callback_query_handler(func=lambda call: True)
 def callback(call):
     if call.data == 'Next':
@@ -124,11 +126,12 @@ def callback(call):
                 \nBarnd: {items['brand']}\
                 \nSize: {items['size']}"
             markup = telebot.types.InlineKeyboardMarkup()
-            image_butt = telebot.types.InlineKeyboardButton("Image", url=items['images'][0]['image'])
-            markup.add(image_butt)
+            # image_butt = telebot.types.InlineKeyboardButton("Image", url=items['images'][0]['image'])
+            # markup.add(image_butt)
             bot.send_message(call.message.chat.id, mess, reply_markup=markup)
-    
+        # bot.send_message(call.message.chat.id, 'Тут пока ничего нет 😄')
     elif call.data == 'Back':
-        bot.send_message(call.message.chat.id, 'Пока не готово')
+        bot.send_message(call.message.chat.id, 'Тут пока ничего нет 😝')
+
 
 bot.polling(non_stop=True)
