@@ -1,4 +1,3 @@
-from email.mime import image
 import telebot
 from telebot import types
 from Buttons_for_Menu import *
