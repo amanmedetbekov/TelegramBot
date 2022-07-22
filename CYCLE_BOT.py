@@ -127,6 +127,8 @@ def callback(call):
             image_butt = telebot.types.InlineKeyboardButton("Image", url=items['images'][0]['image'])
             markup.add(image_butt)
             bot.send_message(call.message.chat.id, mess, reply_markup=markup)
-
+    
+    elif call.data == 'Back':
+        bot.send_message(call.message.chat.id, 'Пока не готово')
 
 bot.polling(non_stop=True)
